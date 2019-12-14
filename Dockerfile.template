@@ -2,13 +2,12 @@ FROM       ubuntu:%VERSION%
 MAINTAINER Jan Tulak "https://github.com/jtulak"
 
 RUN apt-get update
-RUN unminimize
+RUN yes | unminimize
 
-RUN apt-get install -y openssh-server mc tmux nmap rsync
+RUN apt-get install -y openssh-server mc tmux nmap rsync vim
 RUN mkdir /var/run/sshd
 
-RUN echo 'root:root' |chpasswd
-RUN useradd -ms /bin/bash jtulak
+RUN useradd -ms /bin/bash -p jtulak jtulak
 
 RUN sed -ri 's/.*PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config \
  && sed -ri 's/.*PermitRootLogin\s+.*/PermitRootLogin no/' /etc/ssh/sshd_config \
@@ -23,4 +22,4 @@ VOLUME ["/home/jtulak"]
 
 EXPOSE 22
 
-CMD    ["/usr/sbin/sshd", "-D"]
+CMD    ["/usr/sbin/sshd", "-D", "-e"]

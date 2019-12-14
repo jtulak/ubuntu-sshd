@@ -27,7 +27,7 @@ Config:
 - `ChallengeResponseAuthentication no`
 - `UsePAM no`
 - exposed port 22
-- default user `jtulak` (uid 1000)
+- default user `jtulak` (uid 1000) with password `jtulak`
 - mount volume to `/home/jtulak`
 - default command: `/usr/sbin/sshd -D`
 
@@ -47,7 +47,8 @@ jtulak@test_sshd $
 ## Security
 
 SSH is in a reasonable configuration and allows only key-based login for a non-root user.
-If you need to use root inside of the container, you can use `su` with the password `root`.
+However, the account inside has an easy-to guess password and should be changed if deploying publicly.
+If you need to use root inside of the container, you can use `sudo`.
 
 ## Issues
 
