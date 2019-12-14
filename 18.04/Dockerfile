@@ -7,7 +7,9 @@ RUN yes | unminimize
 RUN apt-get install -y openssh-server mc tmux nmap rsync vim
 RUN mkdir /var/run/sshd
 
-RUN useradd -ms /bin/bash -p jtulak jtulak
+RUN useradd -ms /bin/bash jtulak \
+ && echo 'jtulak:jtulak' | chpasswd \
+ && gpasswd -a jtulak sudo
 
 RUN sed -ri 's/.*PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config \
  && sed -ri 's/.*PermitRootLogin\s+.*/PermitRootLogin no/' /etc/ssh/sshd_config \
