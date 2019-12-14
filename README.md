@@ -34,8 +34,8 @@ Config:
 ## Run example
 
 ```bash
-$ ls
-authorized_keys
+$ ls -a
+.ssh
 $ sudo docker run -d -P -v $(pwd):/home/jtulak --name test_sshd jtulak/ubuntu-sshd:18.04
 $ sudo docker port test_sshd 22
   0.0.0.0:49154
